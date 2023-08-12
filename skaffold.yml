@@ -1,0 +1,45 @@
+apiVersion: skaffold/v4beta6
+kind: Config
+manifests:
+  rawYaml:
+    - ./rabbitmq/manifests/*
+    - ./auth/manifests/*
+    - ./converter/manifests/*
+    - ./gateway/manifests/*
+    - ./notification/manifests/*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: margaiwangara/convertecho-auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: './**/*.py'
+    - image: margaiwangara/convertecho-gateway
+      context: gateway
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: './**/*.py'
+    - image: margaiwangara/convertecho-converter
+      context: converter
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: './**/*.py'
+    - image: margaiwangara/convertecho-notification
+      context: notification
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: './**/*.py'

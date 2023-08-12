@@ -1,0 +1,10 @@
+{
+  "vs-kubernetes": {
+    "disable-linters": ["resource-limits"]
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8"
+  },
+  "python.formatting.provider": "none",
+  "autopep8.args": ["--ignore", "E401"]
+}
